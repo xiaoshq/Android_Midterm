@@ -17,7 +17,7 @@ import java.util.List;
 
 public class DataOperation {
     private static final String[] tableColumns = new String[] {"id","name","img",
-            "sex","region","born","dead","master"};
+            "sex","region","born","dead","master","isFavourite","isDeleted"};
     private Context context;
     private DatabaseHelper databaseHelper;
 
@@ -54,7 +54,7 @@ public class DataOperation {
             db = databaseHelper.getWritableDatabase();
             db.beginTransaction();
 
-            String str1 = "insert into data (id,name,img,sex,region,born,dead,master) values";
+            String str1 = "insert into data (id,name,img,sex,region,born,dead,master,isFavourite,isDeleted) values";
 
             String info1 = "曹操是西园八校尉之一，曾只身行刺董卓，失败后和袁绍共同联合天下诸侯讨伐董卓，后独自发展自身势力，一生中先后战胜了袁术、吕布、张绣、袁绍、刘表、张鲁、马超等割据势力，统一了北方。但是在南下讨伐江东的战役中，曹操在赤壁惨败。后来在和蜀汉的汉中争夺战中，曹操再次无功而返。曹操一生未称帝，他病死后，曹丕继位后不久称帝，追封曹操为魏武皇帝。";
             String info2 = "刘备，蜀汉的开国皇帝，汉景帝之子中山靖王刘胜的后代。刘备少年孤贫，以贩鞋织草席为生。黄巾起义时，刘备与关羽、张飞桃园结义，成为异姓兄弟，一同剿除黄巾，有功，任安喜县尉，不久辞官；董卓乱政之际，刘备随公孙瓒讨伐董卓，三人在虎牢关战败吕布。后诸侯割据，刘备势力弱小，经常寄人篱下，先后投靠过公孙瓒、曹操、袁绍、刘表等人，几经波折，却仍无自己的地盘。赤壁之战前夕，刘备在荆州三顾茅庐，请诸葛亮出山辅助，在赤壁之战中，联合孙权打败曹操，奠定了三分天下的基础。刘备在诸葛亮的帮助下占领荆州，不久又进兵益州，夺取汉中，建立了横跨荆益两州的政权。后关羽战死，荆州被孙权夺取，刘备大怒，于称帝后伐吴，在夷陵之战中为陆逊用火攻打得大败，不久病逝于白帝城，临终托孤于诸葛亮。";
@@ -67,16 +67,16 @@ public class DataOperation {
             String info9 = "在争夺继承权问题上处心积虑，战胜了文才更胜一筹的弟弟曹植，被立为王世子。曹操逝世后，曹丕继位成为魏王，以不参加葬礼之罪逼弟弟曹植写下七步诗，险些将其杀害，又顺利夺下弟弟曹彰的兵权，坐稳了魏王之位。不久，曹丕逼汉献帝让位，代汉称帝，为魏国开国皇帝。刘备伐吴时，曹丕看出刘备要失败，但不听谋士之言，偏要坐山观虎斗，事后又起兵伐吴，结果被徐盛火攻击败。回洛阳后，曹丕大病，临终前托付曹睿给曹真、司马懿等人，终年四十岁。";
             String info10 = "先主领荆州，伊籍荐良。良至，先主优礼相待，请问保守荆襄之策。与语大悦，遂用良为从事。及先主伐蜀地，军师亮特遣良奉书报之庞统凶兆。后统亡，亮往蜀地，留良等助关羽。后吴都督鲁肃设宴请羽，良以有诈谏之，不从。及先主为汉中王，羽讨魏，以良、伊籍为参谋，一同征进。羽臂中毒箭，名医华佗为之刮骨，羽与良弈棋。后荆州失，羽差良、伊籍赍文三道，星夜赴成都求救。先主践祚，起大军伐吴，以良、陈震掌理文书。及吴中仇人尽诛，良奏请回，先主不从。吴以陆逊为督，良奏先主需提防，又不从。吴军坚守不出，良奏其必欲待蜀军之变。后先主下寨，良劝画图本报与丞相亮。后得亮令，火速投御营来，然军已败。先主崩，南蛮叛乱，会良卒。";
 
-            db.execSQL(str1+"(1, '曹操','/sdcard/caocao.png',0,'豫州沛国谯',155,220,'"+info1+"');");
-            db.execSQL(str1+"(2, '刘备','/sdcard/liubei.png',0,'幽州涿郡涿',161,223,'"+info2+"');");
-            db.execSQL(str1+"(3, '周瑜','/sdcard/zhouyu.png',0,'扬州庐江郡舒',175,210,'"+info3+"');");
-            db.execSQL(str1+"(4, '诸葛亮','/sdcard/zhugeliang.png',0,'徐州琅邪国阳都',181,234,'"+info4+"');");
-            db.execSQL(str1+"(5, '司马昭','/sdcard/simazhao.png',0,'司隶河内郡温',211,265,'"+info5+"');");
-            db.execSQL(str1+"(6, '孙权','/sdcard/sunquan.png',0,'扬州吴郡富春',182,252,'"+info6+"');");
-            db.execSQL(str1+"(7, '荀彧','/sdcard/xunyu.png',0,'豫州颍川郡颍阴',163,212,'"+info7+"');");
-            db.execSQL(str1+"(8, '庞统','/sdcard/pangtong.png',0,'荆州南郡襄阳',179,214,'"+info8+"');");
-            db.execSQL(str1+"(9, '曹丕','/sdcard/caopi.png',0,'豫州沛国谯',187,226,'"+info9+"');");
-            db.execSQL(str1+"(10,'马良','/sdcard/maliang.png',0,'荆州南郡宜城',187,222,'"+info10+"');");
+            db.execSQL(str1+"(1, '曹操','/sdcard/caocao.png',0,'豫州沛国谯',155,220,'"+info1+"',0,0);");
+            db.execSQL(str1+"(2, '刘备','/sdcard/liubei.png',0,'幽州涿郡涿',161,223,'"+info2+"',0,0);");
+            db.execSQL(str1+"(3, '周瑜','/sdcard/zhouyu.png',0,'扬州庐江郡舒',175,210,'"+info3+"',0,0);");
+            db.execSQL(str1+"(4, '诸葛亮','/sdcard/zhugeliang.png',0,'徐州琅邪国阳都',181,234,'"+info4+"',0,0);");
+            db.execSQL(str1+"(5, '司马昭','/sdcard/simazhao.png',0,'司隶河内郡温',211,265,'"+info5+"',0,0);");
+            db.execSQL(str1+"(6, '孙权','/sdcard/sunquan.png',0,'扬州吴郡富春',182,252,'"+info6+"',0,0);");
+            db.execSQL(str1+"(7, '荀彧','/sdcard/xunyu.png',0,'豫州颍川郡颍阴',163,212,'"+info7+"',0,0);");
+            db.execSQL(str1+"(8, '庞统','/sdcard/pangtong.png',0,'荆州南郡襄阳',179,214,'"+info8+"',0,0);");
+            db.execSQL(str1+"(9, '曹丕','/sdcard/caopi.png',0,'豫州沛国谯',187,226,'"+info9+"',0,0);");
+            db.execSQL(str1+"(10,'马良','/sdcard/maliang.png',0,'荆州南郡宜城',187,222,'"+info10+"',0,0);");
 
             db.setTransactionSuccessful();
         } catch (Exception e) {
@@ -169,6 +169,8 @@ public class DataOperation {
         data.born = (cursor.getString(cursor.getColumnIndex("born")));
         data.dead = (cursor.getString(cursor.getColumnIndex("dead")));
         data.master = (cursor.getString(cursor.getColumnIndex("master")));
+        data.isFavourite = (cursor.getInt(cursor.getColumnIndex("isFavourite")));
+        data.isDeleted = (cursor.getInt(cursor.getColumnIndex("isDeleted")));
         return data;
     }
 
@@ -188,6 +190,8 @@ public class DataOperation {
             cv.put("born",data.born);
             cv.put("dead",data.dead);
             cv.put("master",data.master);
+            cv.put("isFavourite",data.isFavourite);
+            cv.put("isDeleted",data.isDeleted);
             db.update("data",cv,"id = ?",new String[]{idStr});
 
             db.setTransactionSuccessful();
@@ -218,6 +222,8 @@ public class DataOperation {
             cv.put("born",data.born);
             cv.put("dead",data.dead);
             cv.put("master",data.master);
+            cv.put("isFavourite",0);
+            cv.put("isDeleted",0);
             db.insertOrThrow("data",null,cv);
 
             db.setTransactionSuccessful();
@@ -247,6 +253,56 @@ public class DataOperation {
             return true;
         } catch (Exception e) {
             Log.e("operate", "", e);
+        } finally {
+            if (db != null) {
+                db.endTransaction();
+                db.close();
+            }
+        }
+        return false;
+    }
+
+    // 根据id添加到favourite
+    public boolean addToFavourite(int id) {
+        SQLiteDatabase db = null;
+        String idStr = Integer.toString(id);
+        try {
+            db = databaseHelper.getWritableDatabase();
+            db.beginTransaction();
+
+            ContentValues cv = new ContentValues();
+            cv.put("isFavourite",1);
+            db.update("data",cv,"id = ?",new String[]{idStr});
+
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e("operate","",e);
+        } finally {
+            if (db != null) {
+                db.endTransaction();
+                db.close();
+            }
+        }
+        return false;
+    }
+
+    // 根据id添加到回收站
+    public boolean addToDeleted(int id) {
+        SQLiteDatabase db = null;
+        String idStr = Integer.toString(id);
+        try {
+            db = databaseHelper.getWritableDatabase();
+            db.beginTransaction();
+
+            ContentValues cv = new ContentValues();
+            cv.put("isDeleted",1);
+            db.update("data",cv,"id = ?",new String[]{idStr});
+
+            db.setTransactionSuccessful();
+            return true;
+        } catch (Exception e) {
+            Log.e("operate","",e);
         } finally {
             if (db != null) {
                 db.endTransaction();

@@ -17,10 +17,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // 创建数据库后，对数据库的操作
-        // data(id，姓名，头像，性别，籍贯，出生年，死亡年，主效势力)
+        // data(id，姓名，头像，性别，籍贯，出生年，死亡年，主效势力，是否已喜爱，是否已删除)
         String sql = "create table if not exists data ";
-        sql += "(id integer primary key autoincrement, name text, img text, ";
-        sql += "sex integer, region text, born text, dead text, master text);";
+        sql += "(id integer primary key autoincrement, name text, img text, sex integer, ";
+        sql += "region text, born text, dead text, master text, isFavourite integer, isDeleted integer);";
         sqLiteDatabase.execSQL(sql);
 
     }
