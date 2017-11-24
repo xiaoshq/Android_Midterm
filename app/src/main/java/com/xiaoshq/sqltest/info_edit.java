@@ -38,6 +38,7 @@ public class info_edit extends AppCompatActivity{
     public EditText info_edit;
     public int id;
     public DataOperation dataOperation;
+    public static Uri new_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -69,10 +70,39 @@ public class info_edit extends AppCompatActivity{
                 intent.putExtra("id", 0);
                 intent.setClass(info_edit.this, info_show.class);
                 startActivity(intent);
+                Data new_data = new Data();
+                new_data.name = name_edit.toString();
+                if(male.isChecked()==true) new_data.sex = 0;
+                else new_data.sex = 1;
+                new_data.born = birth_edit.toString();
+                new_data.dead = death_edit.toString();
+                new_data.master = info_edit.toString();
+                new_data.img = new_img.toString();
+                //TODO:传入id update数据库
             }
         });
 
-        Data data = dataOperation.getDataById(2);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();   //返回上一个界面
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Data new_data = new Data();
+                new_data.name = null;
+                new_data.sex = 0;
+                new_data.born = null;
+                new_data.dead = null;
+                new_data.master = null;
+                new_data.img = null;
+            }
+        });
+
+        Data data = dataOperation.getDataById(id);
         //icon.setImageResource(data.img);
         name_edit.setText(data.name);
         region_edit.setText(data.region);
@@ -95,6 +125,7 @@ public class info_edit extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode==RESULT_OK){
             Uri uri = data.getData();
+            new_img = uri;
             Log.e("uri", uri.toString());
             ContentResolver contentResolver = this.getContentResolver();
             try{

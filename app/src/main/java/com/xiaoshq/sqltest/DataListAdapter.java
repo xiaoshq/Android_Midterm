@@ -61,7 +61,7 @@ public class DataListAdapter extends BaseAdapter {
         }
         holder.dataIdTV.setText(data.id);
         holder.dataNameTV.setText(data.name);
-        holder.dataImgIV.setImageResource(data.img);
+        //holder.dataImgIV.setImageResource(data.img);
         holder.dataSexTV.setText(data.sex);
         holder.dataRegionTV.setText(data.region);
         holder.dataBornTV.setText(data.born);
